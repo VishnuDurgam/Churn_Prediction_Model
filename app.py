@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
 
 # Load trained ML pipeline
 model = joblib.load("model.pkl")
@@ -103,3 +104,38 @@ if st.button("Predict Churn Risk"):
 
     else:
         st.success("Low Risk Customer")
+
+
+# ---------------------------------------------------
+# Feature Importance Section
+# Shows which features influence churn predictions
+# ---------------------------------------------------
+
+st.subheader("Key Drivers of Customer Churn")
+
+# Extract feature importance from RandomForest model
+feature_importance = model.named_steps["model"].feature_importances_
+
+# Get feature names after preprocessing (important)
+feature_names = model.named_steps["preprocessor"].get_feature_names_out()
+
+# Create dataframe for visualization
+importance_df = pd.DataFrame({
+    "Feature": feature_names,
+    "Importance": feature_importance
+}).sort_values(by="Importance", ascending=False)
+
+# Show top 10 most important features
+top_features = importance_df.head(10)
+
+# Plot horizontal bar chart
+fig, ax = plt.subplots()
+
+ax.barh(top_features["Feature"], top_features["Importance"])
+
+ax.set_title("Top Factors Influencing Customer Churn")
+
+ax.invert_yaxis()
+
+# Display chart in Streamlit
+st.pyplot(fig)
