@@ -1,23 +1,41 @@
-# Customer Churn Prediction App
+# Customer Churn Analytics Platform
 
-Machine learning project predicting telecom customer churn.
+An end-to-end machine learning system predicting telecom customer churn.
 
 ## Features
 
-- Data preprocessing
-- Random Forest model
-- Streamlit web application
-- Real-time churn prediction
+- Data preprocessing pipeline
+- Random Forest churn prediction model
+- Model explainability dashboard
+- Customer risk segmentation
+- Business insights visualization
+
+## Architecture
+
+Data Pipeline → Model Training → Prediction Service → Dashboard
+
+## Deployment
+
+Live dashboard built using Streamlit.
 
 ## Tech Stack
 
-Python
-scikit-learn
-Streamlit
-Pandas
+Python  
+scikit-learn  
+Pandas  
+Streamlit  
+Matplotlib
 
-## Run Locally
+## Architechture Diagram
 
-pip install -r requirements.txt
-
-streamlit run app.py
+Data Source
+     ↓
+Data Processing Pipeline
+     ↓
+Model Training Pipeline
+     ↓
+Saved Model (model.pkl)
+     ↓
+Prediction Service
+     ↓
+Streamlit Analytics Dashboard
